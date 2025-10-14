@@ -1,0 +1,41 @@
+{
+  "name": "Django Dev (Python 3.13)",
+  "dockerComposeFile": ["../docker-compose.dev.yml"],
+  "service": "web",
+  "workspaceFolder": "/workspace/src",
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": {
+      "label": "Django Dev Server",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        // Desactivar la detección y reenvío automáticos
+        "remote.autoForwardPorts": false,
+        "remote.autoForwardPortsSource": "process", 
+        "remote.portsAttributes": {
+          "*/tcp": {
+            "onAutoForward": "ignore"
+          }
+        },
+        // Configuración útil para Django
+        "emmet.includeLanguages": {
+          "django-html": "html"
+        },
+        "files.associations": {
+          "**/templates/**/*.html": "django-html",
+          "**/templates/**/*": "django-txt"
+        }
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "batisteo.vscode-django",
+        "qwtel.sqlite-viewer"
+      ]
+    }
+  }
+}
