@@ -1,106 +1,117 @@
-# Django Starter Kit
 
-**Django Starter Kit** es una plantilla base para crear proyectos **Django** rápidamente en un entorno de desarrollo **contenedorizado** con **Docker** y **Devcontainers** (VSCode).
+-----
 
-Está pensada para aprender o iniciar proyectos de forma sencilla, sin configuraciones complicadas.
+# 🚀 Django Starter Kit (Dev Container + Docker Compose)
 
----
+**Django Starter Kit** es una plantilla base para crear proyectos **Django** rápidamente en un entorno de desarrollo **contenedorizado** con **Docker** y **Devcontainers** (VS Code). Te permite empezar a codificar en segundos sin instalaciones locales de Python, entornos virtuales o conflictos de sistema.
 
-## Características principales
+-----
 
--  **Python 3.13**
--  **Django 5.2.7**
--  **SQLite** como base de datos por defecto (sin configuración adicional)
--  **Docker** y **Devcontainers** para un entorno de desarrollo idéntico en cualquier máquina
--  **Bind mount** del código fuente local (`src/`) dentro del contenedor → los cambios se reflejan al instante
--  Estructura limpia y minimalista, ideal para empezar nuevos proyectos
+## ⚙️ Características principales
 
----
+  - **Python 3.13** y **Django 5.2.7**
+  - **SQLite** como base de datos por defecto (sin configuración adicional)
+  - **Docker** y **Devcontainers** para un entorno reproducible en cualquier máquina.
+  - **Bind mount** del código fuente local (`src/`) dentro del contenedor.
+  - Estructura limpia y minimalista, ideal para empezar nuevos proyectos.
+  - **Configuración automática** del entorno de trabajo (archivos `.env`, directorio de trabajo, etc.).
 
-##  Requisitos previos
+-----
+
+## 🛠️ Requisitos previos
 
 Antes de usar esta plantilla asegúrate de tener instalado:
 
-- [Docker](https://www.docker.com/)
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [Extensión Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+  - [Docker Desktop](https://www.docker.com/products/docker-desktop) (o Docker Engine)
+  - [Visual Studio Code](https://code.visualstudio.com/)
+  - Extensión de VS Code: **[Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)**
 
----
+-----
 
-##  Cómo usar este template
+## 💻 Inicio Rápido (Getting Started)
 
-1. Entra en https://github.com/codicattus/django-starter-kit desde tu cuenta de Github y haz clic en el botón ```Use this template```
+### 1\. Crea y Clona el Repositorio
 
-2. Crea un nuevo repositorio haciendo clic en la opción ```Create a new repository```
+1.  Crea un nuevo repositorio a partir de esta plantilla usando el botón **`Use this template`** en GitHub (no uses `git clone`).
 
-3. Elije un propietario, nombre y si quieres hacer público o privado el repositorio y haz clic en ```Create repository```
-
-## Una vez en tu cuenta y dentro del nuevo repositorio que hayas creado ##
-
-1. **Clona** el repositorio:
-
-   ```bash
-   git clone https://github.com/tu_usuario/tu_repositorio nombre-de-tu-proyecto
-   cd nombre-de-tu-proyecto
-
-2. Copia el archivo .env.example a .env:
-    ```bash
-    cp .env.example .env
-
-3. Edita el archivo .env para ajustar cualquier valor necesario, como claves secretas, puertos, usuarios o contraseñas.
-
-4. Elimina el archivo .gitkeep (solo es necesario para mantener la carpeta src en el repositorio)
+2.  **Clona** tu nuevo repositorio localmente:
 
     ```bash
-    rm src/.gitkeep
+    git clone https://github.com/tu_usuario/tu_repositorio nombre-de-tu-proyecto
+    cd nombre-de-tu-proyecto
+    ```
 
-5. Abre el proyecto en VSCode y selecciona
-→ “Reopen in Container” (F1 -> Dev Containers: Reopen in Container)
-(esto construirá automáticamente el entorno con Docker).
+### 2\. Abre el Entorno de Desarrollo
 
-6. Abre una terminal dentro de VSCode (puedes comprobar las versiones de Python y Django instaladas) y crea un nuevo proyecto Django.
+1.  Abre la carpeta del proyecto en VS Code.
+2.  Cuando VS Code pregunte: **"Folder contains Dev Container configuration. Reopen in Container?"**, selecciona **"Reopen in Container"** (o usa `Ctrl+Shift+P` / `Cmd+Shift+P` y selecciona **"Dev Containers: Reopen in Container"**).
+    *(La primera vez, el entorno tardará unos minutos en construirse.)*
 
-    ```bash
-    python -m django startproject nombre_proyecto nombre_proyecto 
+> 💡 **¡Entorno Listo\!** La terminal se abrirá directamente en la carpeta **`src/`** y el archivo `.env` se habrá creado automáticamente a partir de `.env.example`.
 
-7. Muévete a la carpeta del directorio creado:
+-----
 
-    ```bash
-    cd nombre_proyecto
+## 🚀 Primeros Comandos y Desarrollo
 
-7. Crea la base de datos y arranca el servidor:
+La terminal ya está en el directorio de código (`/workspace/src/`).
 
-    ```bash
-    python manage.py migrate
-    python manage.py runserver 0.0.0.0:8000
+### 1\. Configuración Inicial del Proyecto
 
-8. Accede a tu navegador:
-    [http://localhost:8000]
+Utiliza el punto (`.`) para crear la estructura de tu proyecto Django directamente en la carpeta `src/`:
 
----
-### Estructura del proyecto
+```bash
+# La terminal está en src/
+python -m django startproject nombre_proyecto .
+```
 
-El código fuente del proyecto Django se guarda dentro de la carpeta `src/`.
+### 2\. Arrancar el Servidor
 
-El directorio src/ está montado en el contenedor como volumen (bind mount), de modo que los cambios que hagas en tu código local se reflejan inmediatamente dentro del entorno Docker.
+Ejecuta las migraciones iniciales y arranca el servidor:
 
----
+```bash
+python manage.py migrate
+python manage.py runserver 0.0.0.0:8000
+```
 
-## Ideal para
+Accede a tu aplicación en `http://localhost:8000/`.
 
-- Iniciar proyectos Django de forma rápida
+-----
 
-- Clases y talleres de desarrollo web
+## 💾 Git y Control de Versiones
 
-- Prototipos o entornos de aprendizaje reproducibles
+Para realizar `commit` y `push`, debes trabajar desde la raíz del repositorio (`/workspace`), donde se encuentra el directorio **`.git`**.
+
+### Opción A: Usar el Panel de VS Code (Recomendado)
+
+Utiliza el panel de **Control de Código Fuente** (el icono de la bifurcación) de VS Code. El IDE gestionará automáticamente la ubicación del `.git` por ti. Simplemente:
+
+1.  Escribe tu mensaje de *commit*.
+2.  Haz clic en **Commit** y luego en **Sync Changes** (o **Push**).
+
+### Opción B: Usar la Terminal
+
+Si prefieres la terminal, sal del directorio `src/` antes de ejecutar comandos Git:
+
+```bash
+# 1. Sal del directorio de código
+cd .. 
+
+# 2. Ahora estás en /workspace. Ejecuta tus comandos Git:
+git status
+git add .
+git commit -m "feat: Proyecto inicial de Django y estructura base"
+git push
+```
+
+-----
 
 ## Consejos
 
-- Puedes cambiar fácilmente a PostgreSQL o MySQL modificando el docker-compose.yml.
+  - **Dependencias:** Para añadir librerías, edita el archivo **`requirements.txt`** y reconstruye el contenedor (`F1` -\> **"Dev Containers: Rebuild Container"**) para instalar las nuevas dependencias.
+  - **Base de Datos:** Puedes cambiar fácilmente a PostgreSQL o MySQL modificando el `docker-compose.dev.yml`.
+  - **Uso:** Este entorno está optimizado para **desarrollo y aprendizaje**, no para producción.
 
-- Si quieres añadir dependencias, usa requirements.txt dentro del contenedor.
-
-- Este entorno está pensado para desarrollo, no producción.
+-----
 
 ## Licencia
 

@@ -10,6 +10,13 @@
       "onAutoForward": "openBrowser"
     }
   },
+  
+  // 1. Comando que se ejecuta una vez, para copiar el .env
+  "postCreateCommand": "cp .env.example .env && rm src/.gitkeep", 
+
+  // 2. Comando que se ejecuta CADA VEZ que VS Code se conecta
+  "postAttachCommand": "cd src",
+  
   "customizations": {
     "vscode": {
       "settings": {
@@ -21,6 +28,17 @@
             "onAutoForward": "ignore"
           }
         },
+        
+        // 3. CONFIGURACIÓN PARA LIMPIAR LA VISTA DEL EXPLORER
+        "files.exclude": {
+            "**/.devcontainer": true,
+            "**/docker-compose*.yml": true,
+            "**/Dockerfile*": true,
+            "**/.dockerignore": true,
+            "**/.gitignore": true,
+            "README.md": true
+        },
+        
         // Configuración útil para Django
         "emmet.includeLanguages": {
           "django-html": "html"
