@@ -2,7 +2,7 @@
   "name": "Django Dev (Python 3.13)",
   "dockerComposeFile": ["../docker-compose.dev.yml"],
   "service": "web",
-  "workspaceFolder": "/workspace/src",
+  "workspaceFolder": "/workspace",
   "forwardPorts": [8000],
   "portsAttributes": {
     "8000": {

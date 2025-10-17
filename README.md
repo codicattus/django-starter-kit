@@ -61,7 +61,12 @@ Antes de usar esta plantilla asegúrate de tener instalado:
 6. Abre una terminal dentro de VSCode (puedes comprobar las versiones de Python y Django instaladas) y crea un nuevo proyecto Django.
 
     ```bash
-    python -m django startproject mysite .
+    python -m django startproject nombre_proyecto nombre_proyecto 
+
+7. Muévete a la carpeta del directorio creado:
+
+    ```bash
+    cd nombre_proyecto
 
 7. Crea la base de datos y arranca el servidor:
 
