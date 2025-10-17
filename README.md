@@ -33,7 +33,7 @@ Antes de usar esta plantilla asegúrate de tener instalado:
 
 2. Crea un nuevo repositorio haciendo clic en la opción ```Create a new repository```
 
-3. Elije un propietario, nombre y si lo quieres hacer público o privado el repositorio y haz clic en ```Create repository```
+3. Elije un propietario, nombre y si quieres hacer público o privado el repositorio y haz clic en ```Create repository```
 
 ## Una vez en tu cuenta y dentro del nuevo repositorio que hayas creado ##
 
