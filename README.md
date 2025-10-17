@@ -29,10 +29,18 @@ Antes de usar esta plantilla asegúrate de tener instalado:
 
 ##  Cómo usar este template
 
+1. Entra en https://github.com/codicattus/django-starter-kit desde tu cuenta de Github y haz clic en el botón ```Use this template```
+
+2. Crea un nuevo repositorio haciendo clic en la opción ```Create a new repository```
+
+3. Elije un propietario, nombre y si lo quieres hacer público o privado el repositorio y haz clic en ```Create repository```
+
+## Una vez en tu cuenta y dentro del nuevo repositorio que hayas creado ##
+
 1. **Clona** el repositorio:
 
    ```bash
-   git clone https://github.com/codicattus/django-starter-kit nombre-de-tu-proyecto
+   git clone https://github.com/tu_usuario/tu_repositorio nombre-de-tu-proyecto
    cd nombre-de-tu-proyecto
 
 2. Copia el archivo .env.example a .env:
@@ -68,14 +76,6 @@ Antes de usar esta plantilla asegúrate de tener instalado:
 ### Estructura del proyecto
 
 El código fuente del proyecto Django se guarda dentro de la carpeta `src/`.
-
-Si deseas crear un nuevo proyecto Django a partir de esta plantilla, 
-simplemente clona de nuevo el repositorio con otro nombre de carpeta:
-
-```bash
-git clone https://github.com/codicattus/django-starter-kit mi_nuevo_proyecto
-``` 
-Así mantendrás separados tus proyectos y cada uno tendrá su propio entorno `src/`.
 
 El directorio src/ está montado en el contenedor como volumen (bind mount), de modo que los cambios que hagas en tu código local se reflejan inmediatamente dentro del entorno Docker.
 
