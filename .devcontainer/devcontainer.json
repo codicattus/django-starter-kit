@@ -12,17 +12,14 @@
   },
   
   // 1. Comando que se ejecuta una vez, para copiar el .env
-  "postCreateCommand": "cp .env.example .env && rm src/.gitkeep", 
-
-  // 2. Comando que se ejecuta CADA VEZ que VS Code se conecta
-  "postAttachCommand": "cd src",
-  
+  "postCreateCommand": "cp .env.example .env && rm -f src/.gitkeep && grep -qxF 'cd /workspace/src' /root/.bashrc || echo 'cd /workspace/src' >> /root/.bashrc",
+ 
   "customizations": {
     "vscode": {
       "settings": {
         // Desactivar la detección y reenvío automáticos
         "remote.autoForwardPorts": false,
-        "remote.autoForwardPortsSource": "process", 
+        "remote.autoForwardPortsSource": "process",         
         "remote.portsAttributes": {
           "*/tcp": {
             "onAutoForward": "ignore"
@@ -36,7 +33,9 @@
             "**/Dockerfile*": true,
             "**/.dockerignore": true,
             "**/.gitignore": true,
-            "README.md": true
+            "README.md": true,
+            "LICENSE": true,
+            ".env.example": true
         },
         
         // Configuración útil para Django
