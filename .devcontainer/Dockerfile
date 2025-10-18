@@ -8,12 +8,8 @@ ENV PYTHONUNBUFFERED=1
 
 EXPOSE 8000
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-       build-essential \
-       git \
-       curl \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get install -y --no-install-recommends git openssh-client
 
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install --upgrade pip && pip install -r /tmp/requirements.txt
