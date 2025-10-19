@@ -116,48 +116,54 @@ git push
 
 ## 🔐 Configuración de Autenticación con SSH (Recomendado)
 
-Dado que este proyecto utiliza un Dev Container, la autenticación de Git a través de HTTPS puede fallar (error `terminal prompts disabled`). La solución más robusta y segura es usar el protocolo SSH, que aprovecha el reenvío de claves de VS Code.
+Para interactuar con GitHub de forma segura sin problemas de contraseña, generaremos la clave SSH directamente dentro del Dev Container.
 
-### 1\. Generar la Clave SSH en tu Máquina Local 💻
+1. Generar la Clave SSH Dentro del Contenedor 🛠️
 
-Necesitas una clave SSH en tu sistema operativo que luego será registrada en GitHub.
+    Ejecuta el siguiente comando dentro de la terminal del Dev Container:
 
-| Sistema Operativo | Comando de Generación (Recomendado) | Ubicación por Defecto |
-| :--- | :--- | :--- |
-| **macOS / Linux** | `ssh-keygen -t ed25519 -C "tu_email@ejemplo.com"` | `~/.ssh/id_ed25519` y `~/.ssh/id_ed25519.pub` |
-| **Windows** (Git Bash/PowerShell) | `ssh-keygen -t ed25519 -C "tu_email@ejemplo.com"` | `C:\Users\tu_usuario\.ssh\id_ed25519` y `...id_ed25519.pub` |
+    Abre la terminal del Dev Container (Asegúrate de que Git y openssh-client estén instalados en el Dockerfile).
 
-**Pasos Detallados:**
+    Ejecuta el siguiente comando, sustituyendo el email por el de tu cuenta de GitHub (o el de noreply):
 
-1.  Abre tu terminal favorita (Terminal, Git Bash, o PowerShell).
-2.  Ejecuta el comando de generación, sustituyendo el correo por el tuyo.
-3.  Cuando te pida **"Enter a file in which to save the key"**, presiona **`Enter`** para usar la ruta por defecto.
-4.  Introduce y confirma una *passphrase* segura (opcional, pero recomendada).
-5.  **Inicia el `ssh-agent`** y añade tu clave para que el sistema la use automáticamente:
+```bash
+ssh-keygen -t ed25519 -C "tu_email@ejemplo.com"
+```
 
-| Sistema Operativo | Comandos para `ssh-agent` |
-| :--- | :--- |
-| **macOS / Linux** | `eval "$(ssh-agent -s)"`<br>`ssh-add ~/.ssh/id_ed25519` |
-| **Windows (Git Bash)** | `eval $(ssh-agent -s)`<br>`ssh-add ~/.ssh/id_ed25519` |
+    Te pedirá dos cosas:
 
-### 2\. Añadir la Clave SSH a tu Cuenta de GitHub 🔑
+  ```"Enter a file in which to save the key"```: Simplemente presiona ```Enter``` para usar la ubicación por defecto (/root/.ssh/id_ed25519).
 
-La clave pública (`.pub`) debe ser registrada en GitHub para que te reconozca.
+  ```"Enter passphrase"```: Introduce una contraseña segura (es opcional, pero recomendada).
 
-1.  **Copia la Clave Pública:** Obtén el contenido completo del archivo `id_ed25519.pub` (es texto largo).
-      * **Linux / macOS (copiar al portapapeles):** `cat ~/.ssh/id_ed25519.pub | pbcopy`
-      * **Windows (PowerShell):** `Get-Content ~/.ssh/id_ed25519.pub | Set-Clipboard`
-      * Alternativamente, abre el archivo `.pub` con un editor de texto y copia todo el contenido.
-2.  **Navega a GitHub:**
-      * Ve a **Settings** (en tu foto de perfil).
-      * En el menú lateral, selecciona **SSH and GPG keys**.
-      * Haz clic en **New SSH key**.
-3.  **Pega la Clave:**
-      * En **Title**, pon un nombre descriptivo (ej: `Desktop-DevContainer`).
-      * En **Key**, pega el contenido copiado del archivo `.pub`.
-      * Haz clic en **Add SSH key**.
+2. Añadir la Clave SSH a tu Cuenta de GitHub 🔑
+    La clave pública (id_ed25519.pub) debe ser copiada desde el contenedor y registrada en GitHub.
 
-### 3\. Cambiar la URL del Repositorio (En el Contenedor)
+    Copia la Clave Pública desde el Contenedor:
+
+    Ejecuta en la terminal del Dev Container para mostrar el contenido:
+
+```bash
+cat /root/.ssh/id_ed25519.pub
+```
+
+  Copia todo el contenido que se muestra en la terminal (comienza con ssh-ed25519...).
+
+  Navega a GitHub:
+
+  Ve a ```Settings > SSH and GPG keys```.
+
+  Haz clic en ```New SSH key```.
+
+  Pega la Clave:
+
+  En Title, pon un nombre descriptivo (ej: DevContainer-Blog-Project).
+
+  En Key, pega el contenido copiado de la terminal.
+
+  Haz clic en ```Add SSH key```.
+
+### 3 Cambiar la URL del Repositorio (En el Contenedor)
 
 Finalmente, dentro de la terminal del Dev Container, debes cambiar el protocolo de comunicación de Git.
 
@@ -167,7 +173,7 @@ Finalmente, dentro de la terminal del Dev Container, debes cambiar el protocolo 
 
     ```bash
     cd /workspace
-    git remote set-url origin git@github.com:tu_email@ejemplo.com/blog.git
+    git remote set-url origin git@github.com:tu_email@ejemplo.com/tu_repositorio.git
     ```
 
 A partir de ahora, cualquier comando de Git (`pull`, `push`, `fetch`) funcionará sin problemas de contraseña, ya que VS Code reenviará tu clave SSH privada para la autenticación.
